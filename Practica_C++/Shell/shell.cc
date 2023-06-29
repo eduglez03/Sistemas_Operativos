@@ -27,7 +27,6 @@ void print_prompt(int last_command_status){
   }
 }
 
-
 // FUNCION QUE LEE DE LA ENTRADA ESTANDAR EL COMANDO INTRODUCIDO POR EL USUARIO 
 std::error_code read_line(int fd, std::string& line){
   std::vector<uint8_t> pending_input;  
@@ -99,29 +98,22 @@ std::vector<shell::command> parse_line(const std::string& line) { // dividir lin
   return commands;
 }
 
-
-
-
-
-
-
-
-
+// Funcion que ejecuta programas 
 int execute_program(const std::vector<std::string> &args, bool has_wait) {
- // int contador;
- // 
- // for(int i = 0; i <= args.size();) {
- //   contador++;
- //   i++;
- // }
- // 
- // if(args[contador] == "&") {
- //   has_wait = false;
- // }
-//
- // if(has_wait == true) {
-//
- // }
+ int contador;
+
+ for(int i = 0; i <= args.size();) {
+   contador++;
+    i++;
+  }
+  
+ if(args[contador] == "&") {
+   has_wait = false;
+ }
+
+ if(has_wait == true) {
+
+ }
 
   std::vector<const char*> argv;
   
@@ -132,10 +124,8 @@ int execute_program(const std::vector<std::string> &args, bool has_wait) {
 
   argv.push_back(nullptr);
 
-  //execvp(argv[0], const_cast<char* const*>(argv.data()));
-
-
-    
+  execvp(argv[0], const_cast<char* const*>(argv.data()));
+  
   pid_t pid = getpid(); 
 
   // Crear un proceso hijo
@@ -159,16 +149,6 @@ int execute_program(const std::vector<std::string> &args, bool has_wait) {
 
   return 0;
 }
-
-
-
-
-
-
-
-
-
-
 
 // Funcion que ejecuta el comando interno de echo
 int echo_command(const std::vector<std::string>& argv){
@@ -307,9 +287,7 @@ int cp_command(const std::vector<std::string>& argv) {
   return 0;
 }
 
-
-
-
+// Comando move
 int mv_command(const std::vector<std::string>& argv){
   std::string src_path = argv[1];
   std::string dst_path = argv[2];
